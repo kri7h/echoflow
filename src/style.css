@@ -1,0 +1,243 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#main-background-01 {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  background: linear-gradient(
+    135deg,
+    rgb(95, 158, 160) 0%,
+    rgb(132, 178, 181) 45%,
+    #b892ff 100%
+  );
+  height: 100vh;
+  overflow: hidden; /* Keeps the app frame locked while .main-content scrolls */
+}
+
+/* Full-App CSS Grid Shell */
+.container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: auto 1fr 84px;
+  grid-template-areas:
+    "nav nav"
+    "sidebar main"
+    "player player";
+  gap: 10px;
+  height: 100vh;
+  padding: 10px;
+}
+
+/* 1. Top Navigation Bar */
+.navigation-bar {
+  grid-area: nav;
+  display: flex;
+  align-items: center;
+  /* border: 5px solid linear-gradient(90deg, #7b45e8 8%, #0f68fa 24%, #0f85fa 52%, #bc66e1 100%, #0fe7fa 100%);
+  border-radius: 30px;
+  height: 64px;
+  padding: 0 24px;
+  */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  border-radius: 30px;
+  background: linear-gradient(104deg, #5f9ea0, #89c2d9, #a3a5ff, #b892ff);
+  background:
+    linear-gradient(104deg, #5f9ea0, #89c2d9, #a3a5ff, #b892ff) padding-box,
+    linear-gradient(90deg, #7b45e8, #0f68fa, #0f85fa, #bc66e1, #0fe7fa)
+      border-box;
+  background-origin: border-box;
+}
+
+.nav-item-options {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.nav-item-options li {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.nav-item-options li:not(:has(#site-search)):hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+li:has(#site-search) {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+
+/* Custom Search Input */
+#site-search {
+  width: 210px;
+  padding: 8px 14px 8px 36px;
+  font-size: 15px;
+  color: #0f172a;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+  outline: none;
+  transition:
+    width 0.25s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 16px 16px;
+}
+
+#site-search::placeholder {
+  color: #475569;
+  text-transform: capitalize;
+}
+
+#site-search:focus {
+  width: 250px;
+  background-color: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.22);
+}
+
+#site-search::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+}
+#user-profile-image-login-sign-up {
+  cursor: pointer;
+  object-fit: cover;
+  height: 50px;
+  margin: 2px;
+}
+#user-profile-image-login-sign-up {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.profile-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+}
+/* 2. Left Sidebar (Playlists / Library) */
+.side-bar {
+  grid-area: sidebar;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+/* 3. Main Content Area (Scrollable Track Grid/List)  */
+.main-content {
+  grid-area: main;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* #music-list-appears {
+  display: grid;
+  grid-template-rows: 50px 50px 50px;
+  grid-template-columns: 50px 50px 50px;
+  gap: 150px;
+  height: 40vh;
+  justify-content: space-evenly;
+  align-content: space-between;
+} */
+.music-list-customs {
+  margin-bottom: 16px;
+}
+
+.music-blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-auto-rows: 170px;
+  gap: 16px;
+}
+
+.music-blocks > div {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+/* Scroll Bar customs */
+.main-content::-webkit-scrollbar,
+.side-bar::-webkit-scrollbar {
+  width: 20px;
+}
+
+.main-content::-webkit-scrollbar-track,
+.side-bar::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin: 14px 0;
+}
+
+.main-content::-webkit-scrollbar-thumb,
+.side-bar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  background-image: url("/assets/scroll-thumb.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  min-height: 30px;
+}
+
+/* 4. Bottom Now-Playing Bar  */
+.music-player-bar {
+  grid-area: player;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
